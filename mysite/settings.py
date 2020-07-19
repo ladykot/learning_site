@@ -24,6 +24,7 @@ SECRET_KEY = '7i)t-$0$ahu^xd*qg+c=nk2rz7t_hxhdj5=x0#z*)yy-czpyra'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+# TRACE = True
 
 ALLOWED_HOSTS = ['*']
 INTERNAL_IPS = [
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'debug_toolbar',
+    'django_extensions',
     'courses',
 ]
 
@@ -60,7 +62,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
