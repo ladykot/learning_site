@@ -31,6 +31,7 @@ class Student(models.Model):
     last_name = models.CharField(max_length=50, verbose_name="Фамилия")
     date_joined = models.DateTimeField("Дата регистрации",
                                        auto_now_add=True)
+    courses = models.ManyToManyField("Course", verbose_name=("Курс"))                                  
 
 
 class Course(models.Model):
@@ -44,10 +45,11 @@ class Course(models.Model):
     # у каждого курса есть автор (преподаватель)
     # если препод удаляется, то и его курс
     teacher = ForeignKey(Teacher, on_delete=models.SET_NULL, null=True)
-    students = models.ManyToManyField(Student)
+    students = models.ManyToManyField(Student)  
 
     def __str__(self):
         return self.title
+
 
 class Lesson(models.Model):
     ''' Модель занятия

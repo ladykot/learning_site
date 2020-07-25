@@ -15,15 +15,15 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, re_path, include
 # from courses import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('learn/', include('courses.urls')),
+    path('', include('courses.urls')),
 ]
 
-if settings.DEBUG:
+if settings.DEBUG:      
     import debug_toolbar
     urlpatterns.append(
         path('__debug__/', include(debug_toolbar.urls))

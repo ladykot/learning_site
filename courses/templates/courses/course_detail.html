@@ -1,0 +1,11 @@
+{% extends 'courses/base.html' %}
+{% load static %}       
+
+{% block content %}
+    <h4>"{{ one_course }}"</h4>
+    <p>{{ one_course.description}}</p>    
+{% endblock content %}     
+
+{% block button %}
+    <button type="button" class="btn btn-primary">Записаться на курс</button>
+{% endblock button %}
