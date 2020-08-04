@@ -4,7 +4,13 @@
 {% block content %}
     <h1>More info about this course: </h1>
     <h3>"{{ one_course }}"</h3>
-    <p>{{ one_course.description}}</p>    
-{% endblock content %}     
+    <p>{{ one_course.description}}</p>   
 
+    <form method='POST' action='.'>{% csrf_token %}
+        <p>{{ title }}</p>
+        {{ student_form.as_p }}
+        <button type='submit'>Join the course</button>
+    </form>
+    
+{% endblock content %}     
 

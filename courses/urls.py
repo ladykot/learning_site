@@ -13,11 +13,9 @@ from .views import (
 app_name = 'courses'
 
 urlpatterns = [
-    path('', home_page, name='home'),
-    path('course-new', course_create_view),
-    path('course-list', course_list_view),
-    path('course/<str:slug>/', course_detail_page),
-    path('course/<str:slug>/update/', course_update_view, name='course_update'),
-    path('course/<str:slug>/delete/', course_delete_view, name='course_delete'), 
+    # path('', home_page, name='home'),
+    path('', course_list_view),
+    path('<str:slug>/', course_detail_page),
+    path('<str:slug>/update/', course_update_view, name='course_update'),
+    path('<str:slug>/delete/', course_delete_view, name='course_delete'),
 ]
-

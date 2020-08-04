@@ -33,6 +33,12 @@ class Student(models.Model):
                                        auto_now_add=True)
     courses = models.ManyToManyField("Course", verbose_name=("Курс"))
 
+    @property
+    def full_name(self):
+        return f'{self.first_name} {self.last_name}'
+
+    def __str__(self):
+        return f'{self.id} {self.full_name}'
 
 class Course(models.Model):
     ''' Модель курса

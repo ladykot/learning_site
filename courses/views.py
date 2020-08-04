@@ -2,7 +2,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Course, Teacher
 
-from .forms import CourseForm
+from .forms import CourseModelForm, StudentModelForm
 
 
 def home_page(request, *args, **kwargs):
@@ -24,9 +24,18 @@ def course_detail_page(request, slug):
     ''' Страница просмотра одного курса
     '''
     template_name = "courses/detail.html"
-    # title = 'Detail course'
+    title = 'Do you want to catch the course?'
     one_course = get_object_or_404(Course, slug=slug)
-    context = {'one_course': one_course}
+    student_form = StudentModelForm(request.POST or None)
+    if student_form.is_valid():
+        student_form.save()
+        student_form = StudentModelForm()  # чистая форма
+    
+    context = {
+        'title': title,
+        'one_course': one_course,
+        'student_form': student_form
+    }
     return render(request, template_name, context)
 
 
@@ -42,21 +51,22 @@ def course_list_view(request):
 def course_create_view(request):
     ''' Cтраница создания курса
     '''
-    print(request.POST)
     template_name = "courses/create.html"
-    form = CourseForm(request.POST or None)
-    if form.is_valid():
-        print(form.cleaned_data)
-        
+    title = 'Fill the form, please:'
+    course_form = CourseModelForm(request.POST or None)
+    if course_form.is_valid():
+        course_form.save()
+        course_form = CourseModelForm()  # чистая форма
+    
     context = {
-        'title': 'Fill the form, please:',
-        'form': form
+        'title': title,
+        'course_form': course_form
     }
     return render(request, template_name, context)
 
 
 def course_update_view(request):
-    ''' Cтраница редактирования курса
+    ''' Cтраница редактирования курса   
     '''
     template_name = "courses/update.html"
     one_course = get_object_or_404(Course, slug=slug)

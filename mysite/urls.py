@@ -16,11 +16,12 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path, re_path, include
-# from courses import views
+from courses.views import course_create_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('courses.urls')),
+    path('courses/', include('courses.urls')),
+    path('course-new/', course_create_view),
 ]
 
 if settings.DEBUG:      
