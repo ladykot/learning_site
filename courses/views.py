@@ -1,6 +1,6 @@
 # from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
-from .models import Course, Teacher
+from django.shortcuts import render, get_object_or_404, get_list_or_404
+from .models import Course, Teacher, Lesson
 
 from .forms import CourseModelForm, StudentModelForm
 
@@ -27,6 +27,8 @@ def course_detail_page(request, slug):
     title = 'Do you want to catch the course?'
     one_course = get_object_or_404(Course, slug=slug)
     student_form = StudentModelForm(request.POST or None)
+    list_lessons = Lesson.objects.filter(course__title=one_course.title)  # список занятий на курсе
+
     if student_form.is_valid():
         student_form.save()
         student_form = StudentModelForm()  # чистая форма
@@ -34,7 +36,8 @@ def course_detail_page(request, slug):
     context = {
         'title': title,
         'one_course': one_course,
-        'student_form': student_form
+        'student_form': student_form,
+        'list_lessons': list_lessons,
     }
     return render(request, template_name, context)
 

@@ -10,6 +10,8 @@ class CourseModelForm(forms.ModelForm):
         fields = ['title', 'teacher', 'description']
 
     def clean_title(self, *args, **kwargs):
+        ''' Проверка, есть ли уже такой курс
+        '''
         title = self.cleaned_data.get("title")
         q = Course.objects.filter(title='title')
         print(title)
@@ -24,4 +26,4 @@ class StudentModelForm(forms.ModelForm):
     '''
     class Meta:
         model = Student
-        fields = ['first_name', 'last_name']
+        fields = ['first_name', 'last_name', 'course']
