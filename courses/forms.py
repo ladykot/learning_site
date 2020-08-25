@@ -17,9 +17,8 @@ class CourseModelForm(forms.ModelForm):
         print(title)
         if q.exists():
             raise forms.ValidationError('This title has already been used')
-            
         return title
-        
+
 
 class StudentModelForm(forms.ModelForm):
     ''' Форма записи на курс
@@ -27,3 +26,8 @@ class StudentModelForm(forms.ModelForm):
     class Meta:
         model = Student
         fields = ['first_name', 'last_name', 'course']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
