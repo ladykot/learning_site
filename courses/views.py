@@ -13,7 +13,7 @@ def home_page(request, *args, **kwargs):
     ''' Главная страница со списком актуальных курсов
     для зарегистрированных пользователей
     '''
-    template_name = "courses/home.html"
+    template_name = "courses/course_list.html"
     title = 'Home'
     my_title = 'Lets study!'
     courses = Course.objects.all()
@@ -26,7 +26,7 @@ def home_page(request, *args, **kwargs):
 
 
 # def course_detail_page(request, slug):
-#     ''' Страница просмотра одного курса
+#     ''' Отображение одного курса
 #     '''
 #     template_name = "courses/detail.html"
 #     one_course = get_object_or_404(Course, slug=slug)
@@ -63,6 +63,8 @@ def home_page(request, *args, **kwargs):
 #         return context
 
 class CourseDetail(DetailView):
+    ''' Отображение одного курса
+    '''
     model = Course
     context_object_name = 'one_course'
     # template_name = "courses/detail.html"
@@ -103,8 +105,9 @@ class CourseDetail(DetailView):
 
 
 class ListCourse(ListView):
+    ''' Отображение списка курсов
+    '''
     model = Course
-    template_name = 'courses/home.html'
 
 
 def course_create_view(request):

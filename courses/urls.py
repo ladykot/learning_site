@@ -7,7 +7,7 @@ from .views import (
     course_create_view,
     course_update_view,
     course_delete_view,
-    ListCourse, 
+    ListCourse,
     CourseDetail
 )
 
@@ -15,9 +15,9 @@ app_name = 'courses'
 
 urlpatterns = [
     # path('', home_page, name='home'),
-    path('', ListCourse.as_view()),
+    path('', ListCourse.as_view(), name='course_list'),
     # path('<str:slug>/', course_detail_page),
-    path('<str:slug>/', CourseDetail.as_view()),
+    path('<str:slug>/', CourseDetail.as_view(), name='course_detail'),
     path('<str:slug>/update/', course_update_view, name='course_update'),
     path('<str:slug>/delete/', course_delete_view, name='course_delete'),
 ]
