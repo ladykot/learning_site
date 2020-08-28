@@ -1,9 +1,0 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block content %}
-    <h2>Courses list:</h2>
-        {% for course in course_list %}
-            <li><a href="#">{{ course.title }}</a></li>
-        {% endfor %}
-{% endblock content %}

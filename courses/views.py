@@ -2,8 +2,9 @@
 # представления здесь
 
 from django.shortcuts import get_object_or_404, render
+from django.urls import reverse_lazy
 from django.views.generic.list import ListView
-from django.views.generic import TemplateView, DetailView
+from django.views.generic import TemplateView, DetailView, CreateView
 from .models import Course, Teacher, Lesson
 
 from .forms import CourseModelForm, StudentModelForm
@@ -106,25 +107,31 @@ class CourseDetail(DetailView):
 
 class ListCourse(ListView):
     ''' Отображение списка курсов
+    (с переходом на страницу курса)
     '''
     model = Course
 
 
-def course_create_view(request):
-    ''' Cтраница создания курса
-    '''
-    template_name = "courses/create.html"
-    title = 'Fill the form, please:'
-    course_form = CourseModelForm(request.POST or None)
-    if course_form.is_valid():
-        course_form.save()
-        course_form = CourseModelForm()  # чистая форма
+# def course_create_view(request):
+#     ''' Cтраница создания курса
+#     '''
+#     template_name = "courses/create.html"
+#     title = 'Fill the form, please:'
+#     course_form = CourseModelForm(request.POST or None)
+#     if course_form.is_valid():
+#         course_form.save()
+#         course_form = CourseModelForm()  # чистая форма
 
-    context = {
-        'title': title,
-        'course_form': course_form
-    }
-    return render(request, template_name, context)
+#     context = {
+#         'title': title,
+#         'course_form': course_form
+#     }
+#     return render(request, template_name, context)
+
+class CourseCreate(CreateView):
+    model = Course
+    success_url = reverse_lazy('courses:course_list')
+    fields = '__all__'
 
 
 def course_update_view(request):

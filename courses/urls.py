@@ -3,12 +3,11 @@ from django.contrib import admin
 
 from .views import (
     home_page,
-    # course_detail_page,
-    course_create_view,
     course_update_view,
     course_delete_view,
     ListCourse,
-    CourseDetail
+    CourseDetail,
+    CourseCreate
 )
 
 app_name = 'courses'
@@ -16,8 +15,10 @@ app_name = 'courses'
 urlpatterns = [
     # path('', home_page, name='home'),
     path('', ListCourse.as_view(), name='course_list'),
-    # path('<str:slug>/', course_detail_page),
+    path('create/', CourseCreate.as_view(), name='course_create'),
     path('<str:slug>/', CourseDetail.as_view(), name='course_detail'),
-    path('<str:slug>/update/', course_update_view, name='course_update'),
-    path('<str:slug>/delete/', course_delete_view, name='course_delete'),
+    
+
+    # path('<str:slug>/update/', course_update_view, name='course_update'),
+    # path('<str:slug>/delete/', course_delete_view, name='course_delete'),
 ]

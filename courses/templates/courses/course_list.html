@@ -6,6 +6,8 @@
         {% for course in object_list %}
             <li><a href="{% url 'courses:course_detail' course.slug %}">{{ course.title }}</a></li>
         {% endfor %}
+    <h3>Want to add your course?</h3>
+        <a href="{% url 'courses:course_create'%}">Add new course</a>
 {% endblock content %}
 
 
