@@ -3,13 +3,14 @@
 
 {% block content %}
 
-    <h1>Add your course hear</h1>
+    <h1>Вы можете добавить свой курс.</h1>
+    <h3>Просто заполните форму</h3>
 
     <div class='course-create-form'>
         <form method='POST' action='.'>{% csrf_token %}
             <p>{{ title }}</p>
             {{ form.as_p }}
-            <button type='submit'>Add course</button>
+            <button type='submit'>Добавить</button>
         </form>
     </div>
 

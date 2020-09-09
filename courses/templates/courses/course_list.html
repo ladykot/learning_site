@@ -2,12 +2,13 @@
 {% load static %}
 
 {% block content %}
-    <h2>Courses list:</h2>
+    <h1>Добро пожаловать в мир программирования!</h1>
+    <h2>Давай писать полезные программы. У нас есть несколько курсов:</h2>
         {% for course in object_list %}
             <li><a href="{% url 'courses:course_detail' course.slug %}">{{ course.title }}</a></li>
         {% endfor %}
-    <h3>Want to add your course?</h3>
-        <a href="{% url 'courses:course_create'%}">Add new course</a>
+    <h3>Хочешь обучать других?</h3>
+        <a href="{% url 'courses:course_create' %}">Добавь свой курс здесь!</a>
 {% endblock content %}
 
 

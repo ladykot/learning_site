@@ -1,8 +1,5 @@
-from django.conf import settings
 from django.db import models
 from django.db.models import ForeignKey
-
-from django.utils import timezone
 
 
 class Teacher(models.Model):
@@ -42,35 +39,26 @@ class Student(models.Model):
 
 
 class Course(models.Model):
-    # ''' Модель курса
-    # '''
+    ''' Модель курса
+    '''
     title = models.CharField(
         max_length=200, unique=True)
     description = models.TextField()
     slug = models.SlugField(default='')
     # если препод удаляется, то и его курс
     teacher = ForeignKey(Teacher, on_delete=models.CASCADE, null=True)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return f'{self.title}'
 
 
 class Lesson(models.Model):
-    # ''' Модель занятия 
-    # (один курс - много занятий)
-    # '''
+    ''' Модель занятия 
+    (один курс - много занятий)
+    '''
     date = models.DateTimeField()
     title = models.CharField(max_length=100)
     description = models.CharField(max_length=1000, blank=True, null=True)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     teacher = models.ForeignKey(Teacher, on_delete=models.DO_NOTHING)
-
-    def __str__(self):
-        return f'{self.title}'
-
-    def list_lessons(self):
-        """ Вывод списка занятий на курсе
-        в формате:
-        Дата/время/Название_занятия/Преподаватель
-        """
-        

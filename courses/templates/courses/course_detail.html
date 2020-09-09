@@ -2,18 +2,22 @@
 {% load static %}       
 
 {% block content %}
-    <h1>More info about course: </h1>
-    <h3>"{{ one_course }}"</h3>
+    <h1>"{{ one_course }}"</h1>
     <p>{{ one_course.description}}</p>  
     <h3>Ближайшие занятия:</h3>
         {% for lesson in list_lessons %}
             <li>{{ lesson.date }} "{{ lesson }}", ({{ lesson.teacher.full_name }})</li>
-        {% endfor %}</br>
-    <form method='POST' action='.'>{% csrf_token %}
-        <p>Do you want to catch the course</p>
-        {{ student_form.as_p }}
-        <button type='submit'>Join the course</button>
-    </form>
-
+        {% endfor %}</br>   
+    <div class="links">  
+        <a href="{% url 'courses:course_delete' one_course.slug %}">Удалить</a>
+        <a href="{% url 'courses:course_update' one_course.slug %}">Редактировать</a>
+    </div>
+    <div class="student-form"><br>
+        <form method='POST' action='.'>{% csrf_token %}
+            <p>Хотите записаться на курс?</p>   
+            {{ student_form.as_p }}
+            <button type='submit'>Записаться</button>
+        </form>
+    </div>
 {% endblock content %}     
 
